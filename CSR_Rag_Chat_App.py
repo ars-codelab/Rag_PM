@@ -6,7 +6,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import RetrievalQA
 import os
 import google.generativeai as genai
-from google.colab import userdata
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
@@ -29,7 +28,7 @@ def load_rag_pipeline():
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
 
     # --- Fix 2: Initialize the Language Model ---
-    generation_llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash-latest")
+    generation_llm = ChatGoogleGenerativeAI(model="models/"models/gemini-2.0-flash-lite", temperature=0.3)
     
     # --- Suggestion 1: Removed leading spaces from filenames ---
     github_files = {
