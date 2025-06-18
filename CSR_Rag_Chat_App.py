@@ -33,11 +33,11 @@ def load_rag_pipeline():
     
     # --- Suggestion 1: Removed leading spaces from filenames ---
     github_files = {
-        "CRM_Pro_Technical_documentation.pdf": "https://raw.githubusercontent.com/ars-codelab/TBR/main/RAG_For_PM/Test_Docs/CRM_Pro_Technical_documentation.pdf",
-        "CRM_Pro_User_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/TBR/main/RAG_For_PM/Test_Docs/CRM_Pro_User_guide.pdf",
-        "CRM_Pro_Billing_Information.pdf": "https://raw.githubusercontent.com/ars-codelab/TBR/main/RAG_For_PM/Test_Docs/CRM_Pro_Billing_Information.pdf",
-        "CRM_Pro_Customer_Support_Guide.pdf": "https://raw.githubusercontent.com/ars-codelab/TBR/main/RAG_For_PM/Test_Docs/CRM_Pro_Customer_Support_Guide.pdf",
-        "CRM_Pro_Customer_Support_Upsell_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/TBR/main/RAG_For_PM/Test_Docs/CRM_Pro_Customer_Support_Upsell_guide.pdf"
+    "CRM_Pro_Technical_documentation.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Technical_documentation.pdf",
+        "CRM_Pro_User_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_User_guide.pdf",
+        "CRM_Pro_Billing_Information.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Billing_Information.pdf",
+        "CRM_Pro_Customer_Support_Guide.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Customer_Support_Guide.pdf",
+        "CRM_Pro_Customer_Support_Upsell_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Customer_Support_Upsell_guide.pdf"  
     }
 
     # Download each file using wget
