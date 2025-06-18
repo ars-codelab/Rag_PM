@@ -6,3 +6,4 @@ google-generativeai
 chromadb
 pypdf
 rank-bm25
+requests
