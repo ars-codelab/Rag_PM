@@ -39,12 +39,22 @@ def load_rag_pipeline():
         "CRM_Pro_Customer_Support_Upsell_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Customer_Support_Upsell_guide.pdf"  
     }
 
-    # Download each file using wget
+    - Start of Corrected Section ---
+    # Download each file using the 'requests' library
     for filename, url in github_files.items():
-        if not os.path.exists(filename): # Only download if it doesn't exist
-            print(f"Downloading {filename} from GitHub...")
-            command = ['wget', '-q', '-O', filename, url]
-            subprocess.run(command)
+        if not os.path.exists(filename):
+            try:
+                print(f"Downloading {filename} from GitHub...")
+                response = requests.get(url, stream=True)
+                # Raise an exception if the download failed
+                response.raise_for_status()
+                with open(filename, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            except requests.exceptions.RequestException as e:
+                st.error(f"Failed to download {filename}: {e}")
+                st.stop()
+    # --- End of Corrected Section ---
 
     # Load the Downloaded PDF Documents
     pdf_files = list(github_files.keys())
