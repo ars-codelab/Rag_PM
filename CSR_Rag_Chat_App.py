@@ -39,7 +39,7 @@ def load_rag_pipeline():
         "CRM_Pro_Customer_Support_Upsell_guide.pdf": "https://raw.githubusercontent.com/ars-codelab/Rag_PM/main/Files/CRM_Pro_Customer_Support_Upsell_guide.pdf"  
     }
 
-    - Start of Corrected Section ---
+    #-- Start of Corrected Section ---
     # Download each file using the 'requests' library
     for filename, url in github_files.items():
         if not os.path.exists(filename):
