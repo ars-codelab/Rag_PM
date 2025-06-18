@@ -7,3 +7,4 @@ chromadb
 pypdf
 rank-bm25
 requests
+sqlite3 ≥ 3.35.0
