@@ -10,6 +10,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
 import subprocess # Add this import
+import requests
 
 # --- Page Setup ---
 
