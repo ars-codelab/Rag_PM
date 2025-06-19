@@ -118,6 +118,24 @@ except Exception as e:
     st.stop()
 
 
+# --- NEW: Sidebar with Sample Questions ---
+with st.sidebar:
+    st.header("Sample Questions")
+    sample_questions = [
+        "How do I reset a user's password?",
+        "What are the different billing tiers available?",
+        "What is the process for escalating a critical support ticket?",
+        "Can you summarize the upsell opportunities for a customer on the 'Basic' plan?",
+        "How do I integrate the CRM with external APIs?"
+    ]
+    
+    # This function will handle the logic when a sample question is clicked
+    def ask_sample_question(question):
+        st.session_state.clicked_question = question
+
+    for question in sample_questions:
+        st.button(question, on_click=ask_sample_question, args=[question])
+
 
 # --- Chat History Management ---
 
