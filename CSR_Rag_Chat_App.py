@@ -117,7 +117,6 @@ except Exception as e:
     st.error(f"Error: {e}")
     st.stop()
 
-
 # --- NEW: Sidebar with Sample Questions ---
 with st.sidebar:
     st.header("Sample Questions")
@@ -138,8 +137,6 @@ with st.sidebar:
 
 
 # --- Chat History Management ---
-
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": "Hello! How can I help you with customer inquiries today?"}
@@ -149,7 +146,6 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-        # If the message is from the assistant and has sources, display them
         if message["role"] == "assistant" and "sources" in message:
             with st.expander("Show Sources"):
                 for source_doc in message["sources"]:
@@ -159,38 +155,40 @@ for message in st.session_state.messages:
                     st.divider()
 
 
+# --- NEW: Refactored Chat Logic into a Function ---
+def handle_user_query(prompt):
+    """
+    Handles a user query by invoking the RAG pipeline and updating the chat history.
+    """
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    
+    # Get a response from the RAG pipeline
+    with st.spinner("Thinking..."):
+        rag_response = rag_pipeline.invoke({"query": prompt})
+        response = rag_response['result']
+        sources = rag_response['source_documents']
+        
+        # Add the complete assistant response (with sources) to chat history
+        st.session_state.messages.append({
+            "role": "assistant", 
+            "content": response, 
+            "sources": sources
+        })
+
 # --- Main Chat Input and Response Logic ---
 
+# Handle user input from the main chat box
 if prompt := st.chat_input("What is the customer's question?"):
-    # Add user message to chat history and display it
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    handle_user_query(prompt)
+    # Rerun the app to display the new messages immediately
+    st.rerun()
 
-    # Get a response from the RAG pipeline
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            # Invoke the pipeline
-            rag_response = rag_pipeline.invoke({"query": prompt})
-            response = rag_response['result']
-            sources = rag_response['source_documents']
-
-            # Display the main response
-            st.markdown(response)
-
-            # Display the sources in a collapsible expander
-            with st.expander("Show Sources"):
-                for source_doc in sources:
-                    # Extract the source filename from metadata
-                    source_name = source_doc.metadata.get('source', 'Unknown Source')
-                    st.write(f"**Source:** {source_name}")
-                    st.markdown(source_doc.page_content)
-                    st.divider()
-
-    # Add the complete assistant response (with sources) to chat history
-    st.session_state.messages.append({
-        "role": "assistant",
-        "content": response,
-        "sources": sources
-    })
-
+# Handle user input from the sidebar buttons
+if "clicked_question" in st.session_state and st.session_state.clicked_question:
+    clicked_prompt = st.session_state.clicked_question
+    # Reset the clicked question state
+    st.session_state.clicked_question = None 
+    handle_user_query(clicked_prompt)
+    # Rerun the app to display the new messages immediately
+    st.rerun()
