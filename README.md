@@ -12,13 +12,7 @@ Components
 
 ### 1\. Colab Notebooks (colab/)
 
-The colab/ directory contains Jupyter notebooks designed to be run on Google Colab. These notebooks are essential for:
-
-*   **Data Ingestion and Preprocessing:** Scripts to load and clean raw data.
-    
-*   **Knowledge Base Indexing:** Generating embeddings and creating a searchable index (e.g., FAISS, Annoy) from your knowledge files.
-    
-*   **Model Fine-tuning (Optional):** If applicable, fine-tuning a pre-trained language model for specific tasks or domains.
+The colab/ directory contains Jupyter notebooks designed to be run on Google Colab. T
     
 
 **Getting Started with Colab:**
@@ -26,8 +20,6 @@ The colab/ directory contains Jupyter notebooks designed to be run on Google Col
 1.  Open the .ipynb file(s) in this directory using Google Colab.
     
 2.  Follow the instructions within the notebook cells to execute the steps.
-    
-3.  Ensure you have access to a GPU runtime in Colab for faster processing.
     
 
 ### 2\. Streamlit Application (streamlit\_app/)
